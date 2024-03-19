@@ -25,7 +25,7 @@ This GitHub repository contains the source code and documentation for an Arduino
 ### Installation
 
 1. Clone this repository to your local machine.
-'''git clone https://github.com/yourusername/chicken-coop-automation.git'''
+- `git clone https://github.com/yourusername/chicken-coop-automation.git`
 3. Connect the hardware components per the schematic in the `schematics` folder.
 4. Open the Arduino IDE and load the provided `.ino` files from the `src` folder.
 5. Compile and upload the code to your Arduino UNO.
