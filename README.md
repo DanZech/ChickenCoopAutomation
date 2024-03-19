@@ -1,4 +1,4 @@
-# Chicken Coop Automation Project
+# Chicken Coop Automation
 
 This GitHub repository contains the source code and documentation for an Arduino UNO-based chicken coop automation system. </br>
 The project integrates a temperature and humidity sensor for climate control, a camera with AI for predator detection, and an ultrasonic sound emitter to deter potential threats to wild animals. It is designed to enhance the safety and comfort of chickens by maintaining optimal living conditions and deterring predators or unwanted animals.
