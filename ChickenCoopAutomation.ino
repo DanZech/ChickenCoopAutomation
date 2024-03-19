@@ -18,6 +18,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define YELLOW_LIGHT_PIN 5
 #define RED_LIGHT_PIN 6
 
+// Define o pino Ventilador
+#define FAN_PIN 8
+
+
 void setup() {
   Serial.begin(9600);
   dht.begin();
@@ -25,6 +29,8 @@ void setup() {
   pinMode(GREEN_LIGHT_PIN, OUTPUT);
   pinMode(YELLOW_LIGHT_PIN, OUTPUT);
   pinMode(RED_LIGHT_PIN, OUTPUT);
+
+  pinMode(FAN_PIN, OUTPUT);
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("Erro ao inicializar o display OLED"));
@@ -57,23 +63,27 @@ void loop() {
   display.println("%");
   
   // Controle das luzes do semáforo baseado na temperatura
-  if (temperatura >= 15 && temperatura <= 30) {
-    digitalWrite(GREEN_LIGHT_PIN, HIGH);
-    digitalWrite(YELLOW_LIGHT_PIN, LOW);
-    digitalWrite(RED_LIGHT_PIN, LOW);
-  } else if (temperatura > 5 && temperatura < 15) {
+  if (temperatura > 0 && temperatura < 15) {
     digitalWrite(GREEN_LIGHT_PIN, LOW);
     digitalWrite(YELLOW_LIGHT_PIN, HIGH);
     digitalWrite(RED_LIGHT_PIN, LOW);
-  } else if (temperatura > 30 && temperatura <= 35) {
+    digitalWrite(FAN_PIN, LOW);
+  } else if (temperatura >= 15 && temperatura <= 20) {
+    digitalWrite(GREEN_LIGHT_PIN, HIGH);
+    digitalWrite(YELLOW_LIGHT_PIN, LOW);
+    digitalWrite(RED_LIGHT_PIN, LOW);
+    digitalWrite(FAN_PIN, LOW);
+  } else if (temperatura > 20 && temperatura <= 100) {
     digitalWrite(GREEN_LIGHT_PIN, LOW);
     digitalWrite(YELLOW_LIGHT_PIN, LOW);
     digitalWrite(RED_LIGHT_PIN, HIGH);
+    digitalWrite(FAN_PIN, HIGH);
   } else {
     // Desliga todas as luzes se estiver fora dos intervalos especificados
     digitalWrite(GREEN_LIGHT_PIN, LOW);
     digitalWrite(YELLOW_LIGHT_PIN, LOW);
     digitalWrite(RED_LIGHT_PIN, LOW);
+    digitalWrite(FAN_PIN, LOW);
   }
 
   display.display();
